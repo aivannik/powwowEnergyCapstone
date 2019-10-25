@@ -16,3 +16,9 @@ Meredith's updates for week 10/14-10/18:
 
 3. created a pull request against master for the template
 
+Meredith's upadtes for week 10/19-10-25:
+
+1. created the frontend of the main page using React
+
+2. implemented the "download text as pdf" feature of the main page
+
