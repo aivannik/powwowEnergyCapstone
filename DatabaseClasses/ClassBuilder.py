@@ -28,7 +28,7 @@ def ConnectToDatabaseServer():
         print("Attemping to connect...")
         Connection =psycopg2.connect(**ConfigInfo)
         print("Connection successful...")
- 
+
         #Somthing cursor... its used to navigate the psql server
         cur = Connection.cursor()
         return cur
@@ -62,7 +62,7 @@ for record in cur:
     RainyDaysClass.append(record)
 
 for j in RainyDaysClass:
-    print("here:", j)
+    print("Rainy days:", j)
 
 #Close connection
 CloseDatabaseConnection(cur)
