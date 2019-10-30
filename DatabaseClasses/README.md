@@ -3,12 +3,16 @@
 - The python script ClassBuilder.py requires a database.ini file to connect to
 the psql server
   - From this tutorial: http://www.postgresqltutorial.com/postgresql-python/connect/
-  - This was the syntax for file
-  '[postgresql]
+  - This was the syntax for file:
+  
+  ```
+  [postgresql]
   host=
   database=
   user=
-  password='
+  password=
+  ```
+  
   - Host, user, password provided in the professor's email
   - database is "db1"
 
