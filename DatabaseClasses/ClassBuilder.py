@@ -1,5 +1,4 @@
 import psycopg2
-# import os
 import getpass
 from configparser import ConfigParser
 
@@ -24,27 +23,19 @@ def config(filename='database.ini', section='postgresql'):
 
 def ConnectToDatabaseServer():
     try:
+        #Read the info in the database.ini to connect to the server
         ConfigInfo = config()
         print("Attemping to connect...")
         Connection =psycopg2.connect(**ConfigInfo)
         print("Connection successful...")
 
-        #Somthing cursor...
+        #Somthing cursor... its used to navigate the psql server
         cur = Connection.cursor()
         return cur
-
-        # print("PSQL database version:")
-        # cur.execute("SELECT version()")
-        # db_version = cur.fetchone()
-        # print(db_version)
 
     except(Exception, psycopg2.DatabaseError) as error:
         print("Connection error:")
         print(error)
-    # finally:
-    #     if Connection is not None:
-    #         Connection.close()
-    #         print("Database connection closed")
 
 
 def CloseDatabaseConnection(cur):
@@ -58,34 +49,20 @@ def CloseDatabaseConnection(cur):
 
 
 
-
-
-
-
-
-
-
-
-
-
+#Connect to psql server
 cur = ConnectToDatabaseServer()
 
 
 #Make a class for only rainy day entries
 RainyDaysClass = [];
+
 cur.execute("SELECT * FROM weatherdata WHERE prcp > 1") #Pick entries with rain
+
 for record in cur:
     RainyDaysClass.append(record)
-    # print(type(record))
-    # print(record)
-
 
 for j in RainyDaysClass:
     print("here:", j)
 
-
-
-
-
-
+#Close connection
 CloseDatabaseConnection(cur)
