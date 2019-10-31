@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import HorizontalNav from './components/HorizontalNav';
 import MyDocument from './components/MyDocument';
+import SimpleMap from './components/SimpleMap'
 
 import Test from './index_db_test' // TUTORIAL USE ONLY
 
@@ -66,18 +67,18 @@ import './index.css';
 
  // This component is only a placeholder for now
  // It should be replaced with Google map area later
-  class MapArea extends Component {
-    render() {
-      return (
-        <div className="card">
-          <h5 className="card-header">placeholder</h5>
-          <div className="card-body">
-            <p className="card-text">This is only a placeholder for Google map</p>
-          </div>
-        </div>
-      );
-    }
-  }
+  // class MapArea extends Component {
+  //   render() {
+  //     return (
+  //       <div className="card">
+  //         <h5 className="card-header">placeholder</h5>
+  //         <div className="card-body">
+  //           <p className="card-text">This is only a placeholder for Google map</p>
+  //         </div>
+  //       </div>
+  //     );
+  //   }
+  // }
 
   // Text box for Analysis text
   class Analysis extends Component {
@@ -106,10 +107,10 @@ import './index.css';
       return (
         <div className="container mt-5">
           <div className="row">
-            <div className="col-lg-6">
-              <MapArea />
+            <div className="col-md-6">
+              <SimpleMap />
             </div>
-            <div className="col-lg-6">
+            <div className="col-md-6">
               <Analysis />
             </div>
           </div>

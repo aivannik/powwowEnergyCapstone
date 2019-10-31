@@ -5,6 +5,10 @@
   "dependencies": {
     "@react-pdf/renderer": "^1.6.7",
     "axios": "^0.19.0",
+<<<<<<< HEAD
+=======
+    "google-map-react": "^1.1.5",
+>>>>>>> 52a6471d3be2c8fd85e290b1cc95a7c08b14647a
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-scripts": "3.2.0",

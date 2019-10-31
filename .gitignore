@@ -1,7 +1,5 @@
 .env
-<<<<<<< HEAD
-=======
 .DS_Store
 node_modules/
 package-lock.json
->>>>>>> django-backend
+.vscode
