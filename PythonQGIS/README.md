@@ -1,23 +1,25 @@
 
-### Attempt at getting QGIS functions to work on a python script
+# Attempt at getting QGIS functions to work on a python script
 
-- pip3 install numpy NOPE!
+- ~~pip3 install numpy~~
+  - Won't work on my environment
 
+- Need use GDAL
+## For python3:
 - Install Anaconda3
-- conda install numpy
-- conda install GDAL
-  - enter y
-  - some environment issues might occur but whatever
+- On the anaconda3 command prompt:
+  - conda install numpy
+  - conda install GDAL
+    - enter 'y'
+    - some environment issues might occur but whatever
   - conda install -c conda-forge gdal
     - Maybe this one too?
-  - Can now use GDAL commands on Anaconda terminal thingy
-  - Also installed GDAL on cygwin but this might be redundant
+## GDAL commands documentation can be installed to work on a shell thing
+  - I installed it with cygwin on windows
 
-
-
-
-# To run:
-python PyQGIS.py
-  - Its by default python3 if you installed Anaconda3
-  - Actually ogrinfo -al "ds2677.gdb"
-    - can be used from the command line to print the ENTIRE contents of the dataset
+## To run:
+- ~~python PyQGIS.py
+  - Not working
+- ogrinfo -al "ds2677.gdb"
+  - Can be used from your shell/terminal or the Anaconda3 command prompt if GDAL has been installed
+  - Prints ALL data in the dataset
