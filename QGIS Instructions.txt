@@ -1,0 +1,14 @@
+First, I want to only select the vectors that are overlapping a raster.
+1. Right click the raster layer select Duplicate Layer.
+2. Convert the new raster mask to vector with GDALTools (Raster menu) Conversion -> Polygonize
+3. Processing -> Toolbox. Select the Settings (The little wrench) and under the Processing menu, select General. Change Invalid Feature Filtering to "Ignore Invalid Input Features"
+4. In the Toolbox, use Select by Location. Choose the overlay to be the polygonized raster layer.
+Now all the fields that overlap the raster layer should be selected.
+
+Remove z-axis off of the dataset. The z-axis messes up the zonal statistics.
+Right click the vector layer, select Export --> Save Features As 
+Save an ESRI Shapefile. Put the new vectors in this coordinate system: EPSG:32611 - WGS 84 / UTM zone 11N
+Under Geometry type, select Polygon and uncheck Include z-dimension
+
+Now in the Toolbox, search Zonal Statistics
+Select the raster file and the modified feature vector.
