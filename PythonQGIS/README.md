@@ -30,6 +30,8 @@
 - References:
   - https://pcjericks.github.io/py-gdalogr-cookbook/layers.html
   - https://gis.stackexchange.com/questions/32762/how-to-access-feature-classes-in-file-geodatabases-with-python-and-gdal
+  - https://gdal.org/python/osgeo.ogr-module.html
+- Pretty much use osgeo to read and process .gdb files and GDAL to process .tif?
 
 ## To run:
 - ```python PyQGIS.py```
