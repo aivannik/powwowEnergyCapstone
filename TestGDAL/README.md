@@ -2,8 +2,8 @@
 # Attempt at getting QGIS functions to work on a python script
 - Need use to use GDAL to open .gdb files
 
-## GDAL has some command line commands
-  - I installed it with cygwin on windows
+## GDAL has some command line packages and a python module 
+  - I installed the GDAL package with cygwin on windows
   - orginfo is a command in the GDAL package
   - ```ogrinfo -al "ds2677.gdb" ```
     - Prints ALL data in the dataset
@@ -11,9 +11,7 @@
   - ```orginfo --format```
     - Prints all formats that can be opened...
     -  OpenFileGDB -vector- (rov): ESRI FileGDB
-      - This one is for .gdb?
-
-
+      - This one is for .gdb
 
 ## GDAL for python3:
 - Setting up environment:
