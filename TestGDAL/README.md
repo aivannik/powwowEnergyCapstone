@@ -34,6 +34,6 @@
 - Pretty much use osgeo to read and process .gdb files and GDAL to process .tif?
 
 ## To run:
-- ```python PyQGIS.py```
+- ```python TestGDAL.py```
   - Should run on Anaconda3
   - Will need to change PathName1 to work properly
