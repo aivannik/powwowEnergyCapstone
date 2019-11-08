@@ -1,13 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import { PDFDownloadLink } from "@react-pdf/renderer";
-import HorizontalNav from './components/HorizontalNav';
-import MyDocument from './components/MyDocument';
-import SimpleMap from './components/SimpleMap'
-
-import Test from './index_db_test' // TUTORIAL USE ONLY
-
 import './index.css';
+<<<<<<< HEAD
 // class Square extends React.Component {
 //     render() {
 // 	return (
@@ -119,22 +113,9 @@ import './index.css';
     }
   }
 
+=======
+import App from './App';
+>>>>>>> 12230e2036471dc8a8bcdb239bd4ef1099fa90cf
 
-  class Home extends Component {
-    render(){
-      return (
-        <>
-          <HorizontalNav />
-          <MainBody />
-          
-          <Test />
-        </>
-      );
-    }
-  }
-// ========================================
 
-ReactDOM.render(
-		<Home />,
-		document.getElementById('root')
-);
+ReactDOM.render(<App />, document.getElementById('root'));

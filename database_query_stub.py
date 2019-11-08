@@ -13,12 +13,12 @@ from pathlib import Path  # python3 only
 
 env_path = Path('.') / '.env'
 load_dotenv(dotenv_path=env_path)
-
-user = os.environ.get('USERNAME')
-host = os.environ.get('HOST')
-port = os.environ.get('PORT')
-password = os.environ.get('PASSWORD')
-database = os.environ.get('DATABASE')
+    
+user = os.environ.get('POWWOW_PG_USER')
+host = os.environ.get('POWWOW_PG_HOST')
+port = os.environ.get('POWWOW_PG_PORT')
+password = os.environ.get('POWWOW_PG_PASS')
+database = os.environ.get('POWWOW_PG_DB')
 
 try:
     connection = psycopg2.connect(user=user,
