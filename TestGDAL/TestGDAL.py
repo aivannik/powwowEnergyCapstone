@@ -24,47 +24,33 @@ def ConvertJasonGeometry(Json_Geom):
 
 #This will depend on your environment
 PathName1 = r"../../../PowWowData/landiq/ds2677.gdb"
-PathName2 = "../../../PowWowData/2010_2018-sample/ETa_2010001.tif"  #Use for opening raster files
+PathName2 = "../../../PowWowData/2010_2018-sample/ETa_2010001.tif"  #Use for opening raster files with GDAL
 PathName3 = "../../../PowWowData/Test.txt"
 
 
-#To open .gdb file
+#To open .gdb file...
 driverName = "OpenFileGDB"
 driver = ogr.GetDriverByName(driverName)
 if driver is None:
     print( "%s driver not available." % driverName)
     exit()
-else:
-    print("%s driver IS available." % driverName)
 
+# Open the .gbd using the appropriate driver
 DataSource = driver.Open(PathName1, 0)
 
 if DataSource is None:
     print ("Could not open dataset")
     exit()
 
-
-print("Dataset opened")
+# Dataset opened, now get layer
 layer = DataSource.GetLayer()
-featureCount = layer.GetFeatureCount()
-print ("Number of features in %s: %d" % (os.path.basename(PathName1),featureCount))
 
-
-#To sort by a specific feature, arguments can be sql querries ex Acres < 10
-#Note: Most filters take a while to process
-# layer.SetAttributeFilter("Crop2014 = 'Grapes'")
+# Apply some filtering
 layer.SetAttributeFilter("Acres > 5000")
-
-
-
-#Does not consider OBJECTID as a feature in the layers
-# for feature in layer:
-    # print(feature.GetField(0))
 
 
 # Layer - > Feature - > Geometry
 
-# OneFeature = layer[1]
 # geom_Json = OneFeature.GetGeometryRef().ExportToJson()
 # geom = json.loads(geom_Json)
 # print(geom["coordinates"][0][0][0][0])
@@ -73,19 +59,13 @@ layer.SetAttributeFilter("Acres > 5000")
 
 
 
-for feature in layer:
-    print(feature.GetField("Crop2014"))
+# for feature in layer:
+#     print(feature.GetField("Crop2014"))
     # geom = feature.GetGeometryRef()
     # huh = geom.Centroid().ExportToWkt()
     # print(huh)
     # print(geom.ExportToWkt())
     # print(geom.CoordinateDimension())
-
-# layer.ResetReading()
-
-# print(layer[1].GetFieldCount())
-# print(layer[1].GetGeomFieldRef())
-
 
 
 
