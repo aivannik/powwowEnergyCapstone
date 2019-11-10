@@ -57,7 +57,7 @@
     - The parameter can be SQL queries
   - ```layer.ResetReading()```
     - I think this just resets any filtering
-  - ```for feature in layer:````
+  - ```for feature in layer```
     - A for loop to iterate through every feature in the layer
     - ```feature.GetField(1)```
       - To get specific column values in a feature, note OBJECTID is omitted
