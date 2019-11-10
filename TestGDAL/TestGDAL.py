@@ -3,6 +3,23 @@ import os
 import json
 from osgeo import gdal
 from osgeo import ogr
+import ogr, osr
+
+#Layer -> Feature -> Feature.GetGeometryRef().ExportToJson() -> Json_Geom
+def ConvertJasonGeometry(Json_Geom):
+    try:
+        if(Json_Geom['type'] != 'MultiPolygon'):
+            print("Error, invalid json passed")
+            return
+    except:
+        print("Error, invalid json passed")
+        return
+
+
+    print("Success")
+    return 1
+
+
 
 
 #This will depend on your environment
@@ -34,6 +51,7 @@ print ("Number of features in %s: %d" % (os.path.basename(PathName1),featureCoun
 
 
 #To sort by a specific feature, arguments can be sql querries ex Acres < 10
+#Note: Most filters take a while to process
 # layer.SetAttributeFilter("Crop2014 = 'Grapes'")
 layer.SetAttributeFilter("Acres > 5000")
 
@@ -46,11 +64,20 @@ layer.SetAttributeFilter("Acres > 5000")
 
 # Layer - > Feature - > Geometry
 
+# OneFeature = layer[1]
+# geom_Json = OneFeature.GetGeometryRef().ExportToJson()
+# geom = json.loads(geom_Json)
+# print(geom["coordinates"][0][0][0][0])
+
+# ConvertJasonGeometry(geom["coordinates"])
+
+
+
 for feature in layer:
-    # print(feature.GetField("Crop2014"))
-    geom = feature.GetGeometryRef()
-    huh = geom.Centroid().ExportToWkt()
-    print(huh)
+    print(feature.GetField("Crop2014"))
+    # geom = feature.GetGeometryRef()
+    # huh = geom.Centroid().ExportToWkt()
+    # print(huh)
     # print(geom.ExportToWkt())
     # print(geom.CoordinateDimension())
 
@@ -58,6 +85,9 @@ for feature in layer:
 
 # print(layer[1].GetFieldCount())
 # print(layer[1].GetGeomFieldRef())
+
+
+
 
 
 
