@@ -6,18 +6,18 @@ from osgeo import ogr
 import ogr, osr
 
 #Layer -> Feature -> Feature.GetGeometryRef().ExportToJson() -> Json_Geom
-def ConvertJasonGeometry(Json_Geom):
-    try:
-        if(Json_Geom['type'] != 'MultiPolygon'):
-            print("Error, invalid json passed")
-            return
-    except:
-        print("Error, invalid json passed")
-        return
-
-
-    print("Success")
-    return 1
+# def ConvertJasonGeometry(Json_Geom):
+#     try:
+#         if(Json_Geom['type'] != 'MultiPolygon'):
+#             print("Error, invalid json passed")
+#             return
+#     except:
+#         print("Error, invalid json passed")
+#         return
+#
+#
+#     print("Success")
+#     return 1
 
 
 
@@ -25,7 +25,6 @@ def ConvertJasonGeometry(Json_Geom):
 #This will depend on your environment
 PathName1 = r"../../../PowWowData/landiq/ds2677.gdb"
 PathName2 = "../../../PowWowData/2010_2018-sample/ETa_2010001.tif"  #Use for opening raster files with GDAL
-PathName3 = "../../../PowWowData/Test.txt"
 
 
 #To open .gdb file...
@@ -59,8 +58,8 @@ layer.SetAttributeFilter("Acres > 5000")
 
 
 
-# for feature in layer:
-#     print(feature.GetField("Crop2014"))
+for feature in layer:
+    print(feature.GetField("Crop2014"))
     # geom = feature.GetGeometryRef()
     # huh = geom.Centroid().ExportToWkt()
     # print(huh)
