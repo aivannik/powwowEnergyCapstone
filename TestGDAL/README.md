@@ -54,7 +54,7 @@
     - Returns an int of how many features are in the layer
   - ```layer.SetAttributeFilter("Acres > 5000")```
     - Filters the layer to only have features where the value of the column Acres is greater than 5000
-    - The parameter can be SQL queries
+    - The parameter can be SQL queries, NOTE the syntax has to be exact
   - ```layer.ResetReading()```
     - I think this just resets any filtering
   - ```for feature in layer```
@@ -64,4 +64,4 @@
     - ```geom = feature.GetGeometryRef()```
       - Returns a Geometry class object, used to extract vector/polygon information
         - ```geom.ExportToJson()```
-          - Returns a Json that describes the vector as a polygon, will need to convert to longitude and latitude tho... 
+          - Returns a Json that describes the vector as a polygon, will need to convert to longitude and latitude tho...
