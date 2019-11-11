@@ -36,7 +36,6 @@ if driver is None:
 
 # Open the .gbd using the appropriate driver
 DataSource = driver.Open(PathName1, 0)
-
 if DataSource is None:
     print ("Could not open dataset")
     exit()
