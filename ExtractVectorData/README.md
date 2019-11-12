@@ -5,6 +5,7 @@
 - Also the .gbd path will depend on your system
 - To run:
   -```python ExtractVetorData.py```
-
 - Needed to install psycopg2:
   - ```conda install -c anaconda psycopg2```
+## TODO:
+  - Need to label these vectors, maybe include crop information with polygon data
