@@ -1,6 +1,5 @@
 First, I want to only select the vectors that are overlapping a raster.
-1. Right click the raster layer select Duplicate Layer.
-2. Convert the new raster mask to vector with GDALTools (Raster menu) Conversion -> Polygonize
+2. Convert raster mask to vector with GDALTools (Raster menu) Conversion -> Polygonize
 3. Processing -> Toolbox. Select the Settings (The little wrench) and under the Processing menu, select General. Change Invalid Feature Filtering to "Ignore Invalid Input Features"
 4. In the Toolbox, use Select by Location. Choose the overlay to be the polygonized raster layer.
 Now all the fields that overlap the raster layer should be selected.
@@ -12,3 +11,12 @@ Under Geometry type, select Polygon and uncheck Include z-dimension
 
 Now in the Toolbox, search Zonal Statistics
 Select the raster file and the modified feature vector.
+
+
+To add the X,Y coordinates:
+Select the vector layer.
+Vector -> Geometry Tools -> Centroids
+Create a new layer of centroids.
+Now select this centroid layer.
+Vector -> Geometry Tools -> Add Geometry Attributes
+Now you can create a layer with the centroid x,y coordinates added to the attribute table
