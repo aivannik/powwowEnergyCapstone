@@ -83,6 +83,10 @@ CoorTrans = osr.CoordinateTransformation(inSpatialRef, outSpatialRef)
 Conn = ConnectToDatabaseServer()
 cur = Conn.cursor()
 
+IndexNumber = 0
+Acres = 0.0
+Crop = ""
+
 print("Cycling through features...")
 CurrentVector = 1;
 for Feature in Layer:
@@ -99,8 +103,18 @@ for Feature in Layer:
         Point = { "lng" : GeometryJson["coordinates"][0][0][j][0], "lat" : GeometryJson["coordinates"][0][0][j][1]}
         Polygon.append(Point)
     CoorJson = {"coordinates": Polygon}
+
+    #Add in some extra info
+    IndexNumber = Feature.GetFID()
+    Acres = Feature.GetField("Acres")
+    Crop = Feature.GetField("Crop2014")
+
+
     #Insert to the psql database
-    cur.execute("""INSERT INTO sbvectors ( coordinates ) VALUES ( '{0}' ) """.format(json.dumps(CoorJson)))
+    cur.execute("""INSERT INTO sbvectors2 ( id, crop, acres, coordinates ) VALUES (%s, %s, %s, %s) """, (IndexNumber, Crop, Acres, json.dumps(CoorJson)))
+
+
+
 
 #Commit and close connections
 cur.close()
