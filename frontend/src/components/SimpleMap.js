@@ -6,7 +6,7 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker,Polygon } from "react-go
 
 const SimpleMap = compose(
     withProps({
-        googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyD2zir3KVWBzE4GjkMN_x9RDrp_uEKCboU",
+        googleMapURL: "https://maps.googleapis.com/maps/api/js?key=000",
         loadingElement: <div style={{ height: `200%` }} />,
         containerElement: <div style={{ height: `500px` }} />,
         mapElement: <div style={{ height: `100%` }} />,
