@@ -11,9 +11,8 @@
 - Also the .gbd path will depend on your system
 - You will also need a database.ini file in order to connect the psql database  
 ## FOR OTHER COUNTIES:
-- To change the county change these line:
+- To change the county change these lines:
   - ```Layer.SetAttributeFilter("County = 'Santa Barbara'")```
   - ``` cur.execute("""INSERT INTO sbvectors2 ( id, crop, acres, coordinates ) VALUES (%s, %s, %s, %s) """, (IndexNumber, Crop, Acres, json.dumps(CoorJson))) ```
     - Make sure the table has already been set up in this style:
-    - ```CREATE TABLE sbvectors2 (id INT, crop VARCHAR(100), acres FLOAT, coordinates JSON);
- ```
+    - ```CREATE TABLE sbvectors2 (id INT, crop VARCHAR(100), acres FLOAT, coordinates JSON);```
