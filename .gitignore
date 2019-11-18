@@ -3,4 +3,5 @@
 node_modules/
 package-lock.json
 .vscode
-prodserver/venv/
+prod_server/venv/
+prod_server/migrations/
