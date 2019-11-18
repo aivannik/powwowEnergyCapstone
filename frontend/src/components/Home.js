@@ -1,6 +1,8 @@
 import React from 'react';
 import Analysis from './Analysis'
 import SimpleMap from './SimpleMap'
+import Test from './db_test'
+
 
 const home = () => {
     return (
@@ -12,6 +14,9 @@ const home = () => {
             <div className="col-md-12 mt-5">
               <Analysis />
             </div>
+          <div className="col-md-12 mt-5">
+            <Test />
+          </div>
           </div>
         </div>
       );

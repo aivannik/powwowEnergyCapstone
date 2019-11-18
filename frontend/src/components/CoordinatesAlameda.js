@@ -1,4 +1,4 @@
-const coordinates = [
+const coordinates2 = [
 { lng: -121.557716369629,  lat: 37.8172721862794  }, 
 { lng: -121.5576171875,  lat: 37.5416221618652  }, 
 { lng: -121.55061340332,  lat: 37.5399208068848  }, 
@@ -2344,3 +2344,5 @@ const coordinates = [
 { lng: -121.990547180176,  lat: 37.462558746338  }, 
 { lng: -121.990982055664,  lat: 37.462631225586 }
 ];
+
+export default coordinates2;

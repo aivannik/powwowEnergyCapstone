@@ -3,5 +3,11 @@
 node_modules/
 package-lock.json
 .vscode
-prod_server/venv/
-prod_server/migrations/
+plots/
+data/
+*~
+prod_server/venv
+prod_server/__pycache__
+prod_server/migrations/__pycache__
+prod_server/migrations/versions/__pycache__
+
