@@ -111,7 +111,7 @@ const SimpleMap = compose(
 </div>
 );
 
-{/*
+{/* ////
 //map autocompete tutorialhttps://medium.com/@imranhsayed/google-maps-in-react-autocomplete-location-search-draggable-marker-marker-infobox-565ab8e8cf22
 //standalone search box https://tomchentw.github.io/react-google-maps/#introduction
 import React from "react";
