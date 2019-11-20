@@ -47,6 +47,6 @@ TO RUN SCRIPT ON QGIS:
 for alg in QgsApplication.processingRegistry().algorithms():
       print(alg.id(), "->", alg.displayName())
 ```
-    - To print all algorithms that can be run
+   - To print all algorithms that can be run
  - ```processing.algorithmHelp("qgis:polygonize")```
   - To get a manual on specific algorithm
