@@ -1,6 +1,6 @@
 version: '3.7'
 services:
-  prod_server:
+  web:
     build: ./prod_server
     expose:
       - 5000
