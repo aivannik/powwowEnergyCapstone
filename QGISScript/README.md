@@ -56,9 +56,10 @@ TO RUN SCRIPT ON QGIS:
   - To add a vector layer, the path is just a string to a .shp to .gdb file
 - ``` iface.addRasterLayer(RasterPath, "Layer Name")```
   - To add a raster file, the path should lead to a .tif file
--```#for alg in QgsApplication.processingRegistry().algorithms():
+```
+for alg in QgsApplication.processingRegistry().algorithms():
       print(alg.id(), "->", alg.displayName())
 ```
-  - To print all algorithms that can be run
-- ```processing.algorithmHelp("qgis:polygonize")```
+   - To print all algorithms that can be run
+ - ```processing.algorithmHelp("qgis:polygonize")```
   - To get a manual on specific algorithm
