@@ -9,7 +9,7 @@ var apiKey = process.env.GOOGLE_KEY;
 
 const GMap = compose(
     withProps({
-        googleMapURL: "https://maps.googleapis.com/maps/api/js?key=" + apiKey,
+        googleMapURL: "https://maps.googleapis.com/maps/api/js?key="+ apiKey,
         loadingElement: <div style={{ height: `200%` }} />,
         containerElement: <div style={{ height: `500px` }} />,
         mapElement: <div style={{ height: `100%` }} />,
@@ -37,7 +37,7 @@ class SimpleMap extends Component
 	}
 	refreshList = () => {
 		axios
-			.get("http://localhost:5000/field")
+			.get("192.168.99.100:5000/field")
 			.then(res => this.setState({ fieldDataList: res.data }))
 			.catch(err => console.log(err));
 	};
