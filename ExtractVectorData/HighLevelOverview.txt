@@ -1,8 +1,8 @@
 TLDR: To get coordinate data the .gdb Dataset was opened with ogr, a class was returned with this structure: DataSource->Layer->Feature->Geometry->Individual polygon information, polygon coordinate system was converted from EPSG3310 to EPSG4326, data was formatted and uploaded to our PSQL server
 
+- The goal of this script is to extract the coordinate information on individual polygons
 - Vector data was provided to us as a .gdb file which contains shapefiles that describe the individual polygons for around 300,000 different fields.
 - Along with this polygon data was information on crop, acres and county
-- The goal of this script is to extract the coordinate information on individual polygons
 - To open the .gdb file a python module "ogr" was used
   - A specific driver called "OpenFileGDB" was selected from the "ogr"
   - This driver is used to open/read the .gdb file
