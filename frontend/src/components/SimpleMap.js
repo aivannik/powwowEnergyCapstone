@@ -6,10 +6,11 @@ import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker,Polygon } from "react-google-maps"
 
 var apiKey = process.env.GOOGLE_KEY;
+console.log('apiKey!', apiKey);
 
 const GMap = compose(
     withProps({
-        googleMapURL: "https://maps.googleapis.com/maps/api/js?key=KEY",//+ apiKey,
+		    googleMapURL: "https://maps.googleapis.com/maps/api/js?key=",
         loadingElement: <div style={{ height: `200%` }} />,
         containerElement: <div style={{ height: `500px` }} />,
         mapElement: <div style={{ height: `100%` }} />,
@@ -37,19 +38,24 @@ class SimpleMap extends Component
 	}
 	refreshList = () => {
 		axios
-			.get("192.168.99.100:5000/field")
+			.get("http://localhost:5000/field")
 			.then(res => this.setState({ fieldDataList: res.data }))
 			.catch(err => console.log(err));
 	};
 	drawPolygons = () => {
 		var polygons = []
 		for (var i = 0; i < this.state.fieldDataList.length; ++i) {
+			var colorPolygon = "#FF0000"
+			if (this.state.fieldDataList[i].efficiency == 1)
+			{
+				colorPolygon = "#00FF00";
+			}
 			polygons.push(
 				<Polygon
 					key={this.state.fieldDataList[i].id}
 					path={this.state.fieldDataList[i].coordinates.coordinates}
 					options={{
-						fillColor: "#FF0000",
+						fillColor: colorPolygon,
 						fillOpacity: 0.4,
 						strokeColor: "FF0000",
 						strokeOpacity: 1,
