@@ -9,7 +9,7 @@ var apiKey = process.env.GOOGLE_KEY;
 
 const GMap = compose(
     withProps({
-        googleMapURL: "https://maps.googleapis.com/maps/api/js?key="+ apiKey,
+        googleMapURL: "https://maps.googleapis.com/maps/api/js?key=KEY",//+ apiKey,
         loadingElement: <div style={{ height: `200%` }} />,
         containerElement: <div style={{ height: `500px` }} />,
         mapElement: <div style={{ height: `100%` }} />,
@@ -18,7 +18,7 @@ const GMap = compose(
     withGoogleMap
 
 )((props) =>
-	<GoogleMap defaultZoom={7} defaultCenter={{ lat: 34.4208, lng: -119.6982 }}>
+	<GoogleMap defaultZoom={8} defaultCenter={{ lat: 34.4717, lng: -120.2149 }}>
 		{props.polygons}
 	</GoogleMap>	
 		
