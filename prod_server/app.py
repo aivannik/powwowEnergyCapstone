@@ -16,6 +16,7 @@ sys.path.append('models')
 sys.path.append('algorithm')
 from fields import *
 from field_cluster import *
+from cluster_stub import *
 
 @app.route("/")
 def hello():
@@ -54,6 +55,7 @@ def get_all_field_data():
 def get_field_by_id(id_):
     try:
         field = Field.query.filter_by(id=id_).first()
+        stub_alg(field)
         return jsonify(field.serialize())
     except Exception as e:
 	    return(str(e))
