@@ -1,3 +1,5 @@
+// Test for Postman 
+
 var body = pm.response.json();
 
 var schema = {
