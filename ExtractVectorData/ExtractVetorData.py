@@ -5,16 +5,18 @@ import psycopg2
 from psycopg2 import sql
 import getpass
 from configparser import ConfigParser
+import sys
 
 
 
 #Taken from: http://www.postgresqltutorial.com/postgresql-python/connect/
 def config(filename='database.ini', section='postgresql'):
+
+
     # create a parser
     parser = ConfigParser()
     # read config file
     parser.read(filename)
-
     # get section, default to postgresql
     db = {}
     if parser.has_section(section):
@@ -43,12 +45,6 @@ def ConnectToDatabaseServer():
         print(error)
 
 
-
-
-
-
-# Start here
-
 #PSQL preparation:
 # Make sure you have a "database.ini" file in you working directory
 # Also make sure your table as been set up in this format
@@ -59,65 +55,65 @@ def ConnectToDatabaseServer():
 #**********IMPORTANT**********
 #MAKE SURE THE cur.execute IS INSERTING TO THE CORRECT TABLE!!!!!!
 
-
-
-# Enter filepath to .shp or .gdb
-PathName = "../../../PowWowData/landiq/ETaCrop2014/ETaCrop2014.shp"
-# PathName = "../../../PowWowData/landiq/ds2677.gdb"
+# Syntax:
+# python ExtractVetorData.py [FilePath] [Filter]
 
 #Enter any filtering as an SQL command, ex "County = 'Santa Barbara' AND Acres < 0.05"
-Filter = ""
-# Filter = "Acres < 0.9"
-# Filter = "County = 'Santa Barbara' AND Acres < 0.05"
-# Filter = "County = 'Fresno'"
+# Some Filters:
+# "Acres < 0.9"
+# "County = 'Santa Barbara' AND Acres < 0.05"
+# "County = 'Santa Barbara'"
+# "County = 'Fresno'"
+
+#Typical commands...
+# python ExtractVetorData.py "../../../PowWowData/landiq/ETaCrop2014/ETaCrop2014.shp"
+# python ExtractVetorData.py "../../../PowWowData/landiq/ds2677.gdb"
+# python ExtractVetorData.py "../../../PowWowData/landiq/ds2677.gdb" "County = 'Santa Barbara' AND Acres < 0.05"
 
 
-#Specify which file format
+
+
+assert (len(sys.argv) > 1), "Need to specify file"
+
+#Determine file extension
+FileType = ""
+for j in range(3,0,-1):
+    FileType = FileType + sys.argv[1][len(sys.argv[1])-j]
+FileType = FileType.upper()
 SHP = False
 GDB = False
-SHP = True
-# GDB = True
+if(FileType == "SHP"):
+    SHP = True
+elif(FileType == "GDB"):
+    GDB = True
+PathName = sys.argv[1]
+assert (SHP != GDB), "Invalid file format"
 
+#Get filter
+Filter = ""
+if(len(sys.argv) > 2):
+    Filter = sys.argv[2]
 
-
-
-
-
-
-
-
-
-
-
-
-if(SHP == GDB):
-    print("Specify file format")
-    exit()
-
+#Get driver to open file
 driverName = ""
 if(SHP == True):
     driverName = "ESRI Shapefile"
 elif(GDB == True):
     driverName = "OpenFileGDB"
-
 driver = ogr.GetDriverByName(driverName)
-if driver is None:
-    print( "%s driver not available." % driverName)
-    exit()
+assert (driver != None), "Driver not found for some reason"
+
 
 DataSource = driver.Open(PathName, 0)
-if DataSource is None:
-    print ("Could not open dataset")
-    exit()
-Layer = DataSource.GetLayer()
+assert (DataSource != None), "Could not open dataset, not found"
 print("Dataset opened")
 
-#Filter the layer read from the dataset
-print("Applying filtering...")
-# Layer.SetAttributeFilter("County = 'Santa Barbara' AND Acres < 0.05")
-Layer.SetAttributeFilter(Filter)
-# Layer.SetAttributeFilter("County = 'Santa Barbara'")
+#Extract layer from dataset
+Layer = DataSource.GetLayer()
 
+#Filter the layer read from the dataset
+print("Applying filter...")
+Layer.SetAttributeFilter(Filter)
 
 #Get the conversion from EPSG3310 to EPSG4326 (longitude and latitude)
 inputEPSG = 3310
@@ -130,12 +126,19 @@ CoorTrans = osr.CoordinateTransformation(inSpatialRef, outSpatialRef)
 
 
 # Connect to psql server
-Conn = ConnectToDatabaseServer()
-cur = Conn.cursor()
+# Check that a "database.ini" file can be read
+assert os.path.isfile('database.ini'), "Could not open 'database.ini'"
+# Conn = ConnectToDatabaseServer()
+# cur = Conn.cursor()
 
 IndexNumber = 0
 Acres = 0.0
 Crop = ""
+
+g = input("Confirm this script is writing to the correct PSQL table (y/n):")
+if (g.upper() != "Y"):
+    print("Now exiting...")
+    exit()
 
 
 print("Cycling through features...")
@@ -188,7 +191,7 @@ for Feature in Layer:
     #Insert to the psql database
     #IMPORTANT!
     #MAKE SURE YOU'RE WRITING TO THE CORRECT TABLE
-    cur.execute("""INSERT INTO huron_delano_vectors ( id, crop, acres, coordinates ) VALUES (%s, %s, %s, %s) """, (IndexNumber, Crop, Acres, json.dumps(CoorJson)))
+    # cur.execute("""INSERT INTO huron_delano_vectors ( id, crop, acres, coordinates ) VALUES (%s, %s, %s, %s) """, (IndexNumber, Crop, Acres, json.dumps(CoorJson)))
     # cur.execute("""INSERT INTO sbvectors3 ( id, crop, acres, coordinates ) VALUES (%s, %s, %s, %s) """, (IndexNumber, Crop, Acres, json.dumps(CoorJson)))
 
 
@@ -196,6 +199,6 @@ for Feature in Layer:
 
 #Commit and close connections
 print("Script completed and entries placed in PSQL table")
-cur.close()
-Conn.commit()
-Conn.close()
+# cur.close()
+# Conn.commit()
+# Conn.close()
