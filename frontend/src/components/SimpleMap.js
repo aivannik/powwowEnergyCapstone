@@ -10,7 +10,7 @@ console.log('apiKey!', apiKey);
 
 const GMap = compose(
     withProps({
-		    googleMapURL: "https://maps.googleapis.com/maps/api/js?key=",
+		googleMapURL: "https://maps.googleapis.com/maps/api/js?key=",
         loadingElement: <div style={{ height: `200%` }} />,
         containerElement: <div style={{ height: `500px` }} />,
         mapElement: <div style={{ height: `100%` }} />,

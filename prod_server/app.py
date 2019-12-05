@@ -45,7 +45,8 @@ def hello():
 def get_all_field_data():
     try:
         allFields = Field.query.all()
-        alg(allFields)
+        # alg(allFields)
+        alg_stub(allFields)
         return jsonify([e.serialize() for e in allFields])
     except Exception as e:
         return (str(e))
