@@ -115,6 +115,6 @@ def alg(allFields):
         field.set_efficiency(result[field.id])
 
 
-def alg_stub(allFields):
-    for field in allFields:
-        field.set_efficiency(1)
+# def alg_stub(allFields):
+#     for field in allFields:
+#         field.set_efficiency(1)
