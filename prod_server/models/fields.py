@@ -2,7 +2,7 @@ from app import db
 import random
 
 class Field(db.Model):
-    __tablename__ = 'sbvectors2'
+    __tablename__ = 'huron_delano_vectors'
     id = db.Column(db.Integer, primary_key=True)
     crop = db.Column(db.String)
     acres = db.Column(db.Float)
