@@ -25,8 +25,11 @@ class Field(db.Model):
         lng_centroid = 0
         num_datapoints = len(self.coordinates.get("coordinates"))
         for point in self.coordinates.get("coordinates"):
-            lat_centroid += point["lat"]
-            lng_centroid += point["lng"]
+            try:
+                lat_centroid += point["lat"]
+                lng_centroid += point["lng"]
+            except TypeError:
+                print("FOUND THE BOOBOO!")
         lat_centroid = lat_centroid / num_datapoints
         lng_centroid = lng_centroid / num_datapoints
         return (lat_centroid, lng_centroid)
