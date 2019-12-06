@@ -66,9 +66,11 @@ def ConnectToDatabaseServer():
 # "County = 'Fresno'"
 
 #Typical commands...
-# python ExtractVetorData.py "../../../PowWowData/landiq/ETaCrop2014/ETaCrop2014.shp"
+# python ExtractVetorData.py "../../../PowWowData/landiq/ETaCrop2014/ETaCrop2014.shp" "Acres < 0.05"
 # python ExtractVetorData.py "../../../PowWowData/landiq/ds2677.gdb"
 # python ExtractVetorData.py "../../../PowWowData/landiq/ds2677.gdb" "County = 'Santa Barbara' AND Acres < 0.05"
+# python ExtractVetorData.py "../../../PowWowData/landiq/ds2677.gdb" "County = 'Santa Barbara'"
+
 
 
 
@@ -83,8 +85,10 @@ FileType = FileType.upper()
 SHP = False
 GDB = False
 if(FileType == "SHP"):
+    print("File Format: .shp" )
     SHP = True
 elif(FileType == "GDB"):
+    print("File Format: .gdb" )
     GDB = True
 PathName = sys.argv[1]
 assert (SHP != GDB), "Invalid file format"
@@ -164,7 +168,10 @@ for Feature in Layer:
         for j in range(len(GeometryJson["coordinates"][0])):
             Point = { "lng" : GeometryJson["coordinates"][0][j][0], "lat" : GeometryJson["coordinates"][0][j][1]}
             Polygon.append(Point)
-            CoorJson = {"coordinates": Polygon}
+        CoorJson = {"coordinates": Polygon}
+        # print(type(GeometryJson["coordinates"][0]))
+        # print(type(CoorJson["coordinates"][0]["lng"]))
+
 
     else:
         if(len(GeometryJson["coordinates"][0][0][0]) != 3):
@@ -192,7 +199,7 @@ for Feature in Layer:
     #IMPORTANT!
     #MAKE SURE YOU'RE WRITING TO THE CORRECT TABLE
     # cur.execute("""INSERT INTO huron_delano_vectors ( id, crop, acres, coordinates ) VALUES (%s, %s, %s, %s) """, (IndexNumber, Crop, Acres, json.dumps(CoorJson)))
-    # cur.execute("""INSERT INTO sbvectors3 ( id, crop, acres, coordinates ) VALUES (%s, %s, %s, %s) """, (IndexNumber, Crop, Acres, json.dumps(CoorJson)))
+    # cur.execute("""INSERT INTO sbvectors2 ( id, crop, acres, coordinates ) VALUES (%s, %s, %s, %s) """, (IndexNumber, Crop, Acres, json.dumps(CoorJson)))
 
 
 
