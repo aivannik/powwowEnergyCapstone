@@ -1,15 +1,77 @@
-import React, { Component } from 'react';
-import coordinates1 from './CoordinatesSB'
+import React, { Component, useState } from 'react';
+import coordinates1 from './Coordinates1' 
 import coordinates2 from './CoordinatesAlameda'
 import axios from "axios";
 import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker,Polygon } from "react-google-maps"
+import ReactMapGL from "react-map-gl"	
+import ReactMapboxGl, { Layer, GeoJSONLayer, Popup, Feature } from "react-mapbox-gl"	 //"react-map-gl"
+import ReactDOM from 'react-dom'
+import geojsonObject from "./result.json";
 
+
+const position = [-119.12841033320983, 35.63854513496408];
+
+const Map = ReactMapboxGl({
+  accessToken: "KEY_HERE"
+});
+
+const polygonPaint = {
+	  'fill-color': '#6F788A',
+	  'fill-opacity': 0.7
+	};
+	
+function handleClick() {
+    console.log('polygon click');
+  }
+  
+class SimpleMap extends React.Component {
+	render(){
+	return (
+    <div>
+	 <Map			
+            style="mapbox://styles/anna0864/ck38d6jyg1uly1cmw485a4qhe"
+            center={position}
+			zoom = {[15]}
+            containerStyle={{ height: "40vh", width: "40vw" , zoom: 2}}
+			
+		>
+
+		   <GeoJSONLayer
+			   id = "poly"
+			   type = "geojsonObject"
+			   data={geojsonObject}
+				
+			   fillPaint={{
+                "fill-color": "#ff0000"
+              }}
+			 
+			  fillOnClick = {handleClick }
+			  //onClick = { info => console.log('Clicked:', info)}
+			/>
+			{/*showPopup && <Popup
+					longitude={showPopup.longitude}
+					latitude={showPopup.latitude}
+				  closeButton={true}
+				  closeOnClick={false}
+				  onClose={() => this.setState({showPopup: false})}
+				  anchor="top" >
+				  <div>You are here</div>
+				</Popup>*/}
+				
+		</Map>	
+        
+	</div>
+	
+	);
+	}
+}
+{/*
 var apiKey = process.env.GOOGLE_KEY;
 
 const GMap = compose(
     withProps({
-        googleMapURL: "https://maps.googleapis.com/maps/api/js?key=KEY",//+ apiKey,
+        googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyD2zir3KVWBzE4GjkMN_x9RDrp_uEKCboU", //+ apiKey,
         loadingElement: <div style={{ height: `200%` }} />,
         containerElement: <div style={{ height: `500px` }} />,
         mapElement: <div style={{ height: `100%` }} />,
@@ -18,7 +80,7 @@ const GMap = compose(
     withGoogleMap
 
 )((props) =>
-	<GoogleMap defaultZoom={8} defaultCenter={{ lat: 34.4717, lng: -120.2149 }}>
+	<GoogleMap defaultZoom={7} defaultCenter={{ lat: 34.4208, lng: -119.6982 }}>
 		{props.polygons}
 	</GoogleMap>	
 		
@@ -37,7 +99,7 @@ class SimpleMap extends Component
 	}
 	refreshList = () => {
 		axios
-			.get("192.168.99.100:5000/field")
+			.get("http://192.168.99.100:5000/field")
 			.then(res => this.setState({ fieldDataList: res.data }))
 			.catch(err => console.log(err));
 	};
@@ -94,4 +156,9 @@ class SimpleMap extends Component
 	}
 }
 
+export default SimpleMap;
+ReactDOM.render(
+  <SimpleMap />,
+  document.getElementById("SimpleMap")
+)*/}
 export default SimpleMap;
