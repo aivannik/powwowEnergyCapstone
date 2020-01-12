@@ -1,18 +1,15 @@
 import React, { Component, useState, setState, state } from 'react';
-import coordinates1 from './Coordinates1' 
-import coordinates2 from './CoordinatesAlameda'
 import axios from "axios";
 import { compose, withProps } from "recompose"
-//import { withScriptjs, withGoogleMap, GoogleMap, Marker,Polygon } from "react-google-maps"
-import ReactMapGL from "react-map-gl"	
-import ReactMapboxGl, { Layer, GeoJSONLayer, Popup, Feature, Marker } from "react-mapbox-gl"	 //"react-map-gl"
+import ReactMapboxGl, { GeoJSONLayer, Popup, Marker } from "react-mapbox-gl"	 
 import ReactDOM from 'react-dom'
 import geojsonObject from "./result.json";
 import "./styles.css";
 
 const position = [-119.12841033320983, 35.63854513496408];
+
 const Map = ReactMapboxGl({
-  accessToken: "KEY"
+  accessToken: "pk.eyJ1IjoiYW5uYTA4NjQiLCJhIjoiY2szOGJyc3FsMDd3dTNocDEyNXlqbzhrZSJ9.dL5Ol19lxh5nmf7MWx8Ztg"
 });
 
 const polygonPaint = {
@@ -54,8 +51,8 @@ class SimpleMap extends React.Component {
 			   fillPaint={{
                 "fill-color": "#ff0000"
               }}
-			 
-			/>
+			  lineOnClick  = {this.myClick.bind(this)}/>
+			  
 			<Marker
 			  coordinates={position}
 			  anchor="bottom"
@@ -73,9 +70,29 @@ class SimpleMap extends React.Component {
 			</Popup>}	 
 				
 		</Map>	
-        
+		<div className="btn-group dropright mt-2 mr-2">
+			<button className="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+				Filter by Crop
+			</button>
+			<div className="dropdown-menu">
+				<button className="dropdown-item" type="button">Almond</button>
+				<button className="dropdown-item" type="button">Pistachio</button>
+				<button className="dropdown-item" type="button">Something</button>
+			</div>
+		</div>
+        <div className="btn-group dropright mt-2">
+			<button className="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+				Filter by Year
+			</button>
+			<div className="dropdown-menu">
+				<button className="dropdown-item" type="button">year1</button>
+				<button className="dropdown-item" type="button">year2</button>
+				<button className="dropdown-item" type="button">year3</button>
+			</div>
+		</div>
 	</div>
 	
+
 	);
 	}
 }
