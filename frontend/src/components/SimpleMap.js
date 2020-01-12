@@ -9,7 +9,7 @@ import "./styles.css";
 const position = [-119.12841033320983, 35.63854513496408];
 
 const Map = ReactMapboxGl({
-  accessToken: "pk.eyJ1IjoiYW5uYTA4NjQiLCJhIjoiY2szOGJyc3FsMDd3dTNocDEyNXlqbzhrZSJ9.dL5Ol19lxh5nmf7MWx8Ztg"
+  accessToken: "KEY"
 });
 
 const polygonPaint = {
