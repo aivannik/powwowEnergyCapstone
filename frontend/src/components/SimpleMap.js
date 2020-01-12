@@ -1,31 +1,40 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, setState, state } from 'react';
 import coordinates1 from './Coordinates1' 
 import coordinates2 from './CoordinatesAlameda'
 import axios from "axios";
 import { compose, withProps } from "recompose"
-import { withScriptjs, withGoogleMap, GoogleMap, Marker,Polygon } from "react-google-maps"
+//import { withScriptjs, withGoogleMap, GoogleMap, Marker,Polygon } from "react-google-maps"
 import ReactMapGL from "react-map-gl"	
-import ReactMapboxGl, { Layer, GeoJSONLayer, Popup, Feature } from "react-mapbox-gl"	 //"react-map-gl"
+import ReactMapboxGl, { Layer, GeoJSONLayer, Popup, Feature, Marker } from "react-mapbox-gl"	 //"react-map-gl"
 import ReactDOM from 'react-dom'
 import geojsonObject from "./result.json";
-
+import "./styles.css";
 
 const position = [-119.12841033320983, 35.63854513496408];
-
 const Map = ReactMapboxGl({
-  accessToken: "KEY_HERE"
+  accessToken: "KEY"
 });
 
 const polygonPaint = {
 	  'fill-color': '#6F788A',
 	  'fill-opacity': 0.7
 	};
-	
-function handleClick() {
-    console.log('polygon click');
-  }
-  
+
 class SimpleMap extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state={
+			showPopup: false
+		};
+	}
+
+  myClick(){
+	  this.setState ({
+		  showPopup: !this.state.showPopup
+	  });
+  }
+
+ 
 	render(){
 	return (
     <div>
@@ -46,18 +55,22 @@ class SimpleMap extends React.Component {
                 "fill-color": "#ff0000"
               }}
 			 
-			  fillOnClick = {handleClick }
-			  //onClick = { info => console.log('Clicked:', info)}
 			/>
-			{/*showPopup && <Popup
-					longitude={showPopup.longitude}
-					latitude={showPopup.latitude}
-				  closeButton={true}
-				  closeOnClick={false}
-				  onClose={() => this.setState({showPopup: false})}
-				  anchor="top" >
-				  <div>You are here</div>
-				</Popup>*/}
+			<Marker
+			  coordinates={position}
+			  anchor="bottom"
+			  onClick = {this.myClick.bind(this)}>
+			  <div class="mapMarkerStyle"></div>
+			</Marker>
+			
+			{this.state.showPopup && <Popup
+			  coordinates={position}
+			  offset={{
+				'bottom-left': [12, -38],  'bottom': [0, -38], 'bottom-right': [-12, -38]
+			  }}
+			  OnClick={this.myClick.bind(this)}>
+			  <h1>Popup</h1>
+			</Popup>}	 
 				
 		</Map>	
         
